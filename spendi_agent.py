@@ -25,13 +25,14 @@ def help():
     commands:
         info            -shows information about Spendi Agent
         help            -list all available commands
-        exit            -exit the spendi agent
-        device-info        -get user information
+        exit            -exit the spendi agent (add a number at the end like exit 5 for delay in sec)
+        device-info     -get user information
+        nano            -create a file (cant create folders)
+        rm              -delete a file (cant delete folders)
     """)
 
-def exit_application():
-    print(f"{get_time()} : exit spendi agent...")
-    time.sleep(2)
+def exit_application(delay=0):
+    time.sleep(delay)
 
 def nano(file_name):
     project_folder = Path(__file__).resolve().parent
@@ -92,9 +93,24 @@ def command_prozessing(command):
         case "help":
             help()
 
-        case "exit":
-            exit_application()
-            return 0
+        case command if command.startswith("exit"):
+            try:
+                split = command.split()
+                if split[1] == "-h":
+                    try: 
+                        delay = int(split[2])
+                        print(f"\nexit Spendi Agent with a delay of {delay} sec...")
+                        exit_application(delay)
+                        return 0
+                    except:
+                        print("\nError: there must be given a number after -h")
+                else:
+                    print(f"\nError: unknown argument {split[1]}")
+            except:
+                print("exit Spendi Agent...")
+                exit_application()
+                return 0
+            
 
         case "device-info":
             device_info()
