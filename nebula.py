@@ -129,8 +129,11 @@ def mkdir():
     if path.is_dir():
         print("\npath already exists")
         return
-    os.makedirs(path)
-    print(f"\n{path} was created")
+    try:
+        os.makedirs(path)
+        print(f"\n{path} was created")
+    except PermissionError:
+        print(f"\nyou dont have the permission to create {path}")
 
 def help():
     print("""
