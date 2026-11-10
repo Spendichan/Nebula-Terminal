@@ -109,13 +109,16 @@ def create_zip():
 
 def delete_file(path):
     path = Path(path)
-
-    if path.exists():
+    if path.is_dir():
+        shutil.rmtree(path)
+        print(f"\nremoved {path} and content in it")
+    
+    elif path.is_file():
         path.unlink()
-        print(f"\n{path} was deletet")
-    else:
-        print(f"\nError {path} doesn't exist")
+        print(f"\nremoved {path}")
 
+    else:
+        print(f"\n{path} doesnt exists")
 
 def get_time():
     current_time = time.ctime()
@@ -130,7 +133,7 @@ def help():
         exit            -exit the Nebula Terminal (add a number at the end like exit 5 for delay in sec)
         sysinfo         -show user information
         nano            -create a file (cant create folders)
-        rm              -delete a file (cant delete folders)
+        rm              -delete a file or dir
         ls              -list everything inside a folder
         zip             -create a zip-file containing a folder or file
         weather         -get the current weather stats
@@ -142,6 +145,7 @@ def help():
     exp. commands:
         encrypt         -encrypt data (folders and files)
         decrypt         -decrypt data (folders and files)
+        zip-b           -create a zip bomb (can be really big -> be carefull)
 
     WARNING: If you encrypt data and lose the key (generated in nebula folder or your own)
              it wont be possible to decrypt your data! So be careful with this tool and
