@@ -124,6 +124,13 @@ def get_time():
     current_time = time.ctime()
     return current_time
 
+def mkdir():
+    path = Path(input("path: "))
+    if path.is_dir():
+        print("\npath already exists")
+        return
+    os.makedirs(path)
+    print(f"\n{path} was created")
 
 def help():
     print("""
@@ -132,7 +139,7 @@ def help():
         help            -list all available commands
         exit            -exit the Nebula Terminal (add a number at the end like exit 5 for delay in sec)
         sysinfo         -show user information
-        nano            -create a file (cant create folders)
+        nano            -create a file
         rm              -delete a file or dir
         ls              -list everything inside a folder
         zip             -create a zip-file containing a folder or file
@@ -141,6 +148,7 @@ def help():
         hostname        -show your hostname
         ip              -show your ipv4 and ipv6 address
         speedtest       -test your internet speed
+        mkdir           -create a folder
 
     exp. commands:
         encrypt         -encrypt data (folders and files)
@@ -511,6 +519,9 @@ def command_prozessing(command):
     match command:
         case command if command.replace(" ","") =="zip-b":
             zips_b()
+
+        case command if command.replace(" ","")=="mkdir":
+            mkdir()
 
         case command if command.replace(" ","") =="help":
             help()
