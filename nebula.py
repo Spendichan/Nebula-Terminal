@@ -18,7 +18,7 @@ def hostname():
     return hostname
 
 def speed_test():
-    print("Starting speedtest...")
+    print("speedtest takes a few seconds, please wait...")
 
     try:
         st = speedtest.Speedtest()
@@ -125,7 +125,11 @@ def get_time():
     return current_time
 
 def mkdir():
-    path = Path(input("path: "))
+    print("""\nwarning: Due to the encryption method Nebula uses
+    watch out not to encrypt data containing files bigger then 4GB
+    because it loads the whole data into the ram and it crashes when
+    it overloads. (8GB ram < 10GB data = crash)""")
+    path = Path(input("\npath: "))
     if path.is_dir():
         print("\npath already exists")
         return
@@ -150,7 +154,7 @@ def help():
         disk            -show the disk usage
         hostname        -show your hostname
         ip              -show your ipv4 and ipv6 address
-        speedtest       -test your internet speed
+        speedtest       -test your download and upload speed
         mkdir           -create a folder
 
     exp. commands:
