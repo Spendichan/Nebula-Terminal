@@ -173,7 +173,7 @@ def nano(file_name):
     pathing = project_folder / file_name
 
     if pathing.exists():
-        print(f"{file_name} located in {pathing}")
+        print(f"\n{file_name} located in {pathing}")
 
         file_data = pathing.read_text()
 
