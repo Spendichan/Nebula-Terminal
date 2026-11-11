@@ -126,9 +126,9 @@ def get_time():
 
 def mkdir():
     print("""\nwarning: Due to the encryption method Nebula uses
-    watch out not to encrypt data containing files bigger then 4GB
-    because it loads the whole data into the ram and it crashes when
-    it overloads. (8GB ram < 10GB data = crash)""")
+    watch out not to encrypt data containing files bigger then the amount 
+    of ram you have because it loads the whole data into the ram and it crashes when
+    it overloads. (8GB ram < 10GB example.txt = crash)""")
     path = Path(input("\npath: "))
     if path.is_dir():
         print("\npath already exists")
