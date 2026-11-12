@@ -1,0 +1,7 @@
+cryptography
+requests
+tqdm
+psutil
+packaging
+speedtest-cli
+shutil
