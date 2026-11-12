@@ -22,8 +22,7 @@ def ip():
             s.connect(("1.1.1.1", 53))
             local_ip = s.getsockname()[0]
 
-        print(f"Local IP: {local_ip}")
-        string = f"ipv4: {local_ip}"
+        print(f"ipv4: {local_ip}")
     except OSError:
         print("local ip: unavailable")
 
@@ -33,8 +32,7 @@ def ip():
         ) as response:
             public_ip = response.read().decode()
 
-        print(f"Public IP: {public_ip}")
-        string = f"ipv6: {public_ip}"
+        print(f"ipv6: {public_ip}")
     except Exception:
         print("Public IP: unavailable")
 
