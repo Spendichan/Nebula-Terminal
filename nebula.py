@@ -8,7 +8,6 @@ from pathlib import Path
 import os
 import psutil
 import requests
-import speedtest
 from cryptography.fernet import Fernet
 
 VERSION = "1.0.3"
@@ -16,26 +15,6 @@ VERSION = "1.0.3"
 def hostname():
     hostname = socket.gethostname()
     return hostname
-
-def speed_test():
-    print("speedtest takes a few seconds, please wait...")
-
-    try:
-        st = speedtest.Speedtest()
-
-        st.get_best_server()
-
-        download = st.download() / 1_000_000
-        upload = st.upload() / 1_000_000
-
-        ping = st.results.ping
-
-        print(f"Download: {download:.2f} Mbps")
-        print(f"Upload:   {upload:.2f} Mbps")
-        print(f"Ping:     {ping:.2f} ms")
-
-    except Exception as e:
-        print(f"Speedtest failed: {e}")
 
 def ip():
     try:
@@ -126,9 +105,9 @@ def get_time():
 
 def mkdir():
     print("""\nwarning: Due to the encryption method Nebula uses
-    watch out not to encrypt data containing files bigger then the amount 
-    of ram you have because it loads the whole data into the ram and it crashes when
-    it overloads. (8GB ram < 10GB example.txt = crash)""")
+    watch out not to encrypt data containing files bigger then 4GB
+    because it loads the whole data into the ram and it crashes when
+    it overloads. (8GB ram < 10GB data = crash)""")
     path = Path(input("\npath: "))
     if path.is_dir():
         print("\npath already exists")
@@ -177,7 +156,7 @@ def nano(file_name):
     pathing = project_folder / file_name
 
     if pathing.exists():
-        print(f"\n{file_name} located in {pathing}")
+        print(f"{file_name} located in {pathing}")
 
         file_data = pathing.read_text()
 
@@ -611,9 +590,6 @@ def command_prozessing(command):
 
         case command if command.replace(" ","") =="ls":
             ls()
-
-        case command if command.replace(" ","") =="speedtest":
-            speed_test()
 
         case command if command.replace(" ","") =="ip":
             ip()
